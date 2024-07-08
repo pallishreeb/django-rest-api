@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookstore-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bookstore
+  template:
+    metadata:
+      labels:
+        app: bookstore
+    spec:
+      containers:
+      - name: bookstore
+        image: your-docker-image
+        ports:
+        - containerPort: 8000
