@@ -135,3 +135,40 @@ Make changes to your application code.
 Push the changes to the main branch of your GitHub repository.
 GitHub Actions will automatically build the Docker image, transfer the files to the EC2 instance, and restart the Docker containers.
 every time you push changes to your main branch, the deployment process on the EC2 instance is automated.
+
+
+
+flow 1- 
+Code - docker  - github - github action/jenkins - EC2(install docker to run docker image)/EKS,ECS
+
+
+flow 2-
+Code - docker - docker hub(registry) - github - github action - AWS EC2(install docker to run docker image)/EKS,ECS
+
+
+step 1- Code
+Develop your application locally.
+
+step 2 -Docker
+Create Dockerfile and docker-compose.yml.
+Build and test your Docker image locally.
+
+step 3- Docker Hub (Registry)
+
+Push your Docker image to Docker Hub or any other container registry (like AWS ECR).
+
+step 4 -GitHub
+
+Push your code to a GitHub repository.
+
+step 5- GitHub Actions
+
+Set up a GitHub Actions workflow that:
+Builds your Docker image.
+Pushes the Docker image to Docker Hub (or another registry).
+
+
+step 6 - AWS EC2
+Deploys the updated Docker image to your AWS EC2 instance.
+Ensure Docker is installed and running on your EC2 instance.
+Pull and run the Docker image from Docker Hub (or another registry).
