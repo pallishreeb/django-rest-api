@@ -40,6 +40,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
     - name: SSH to EC2 and deploy
       uses: appleboy/ssh-action@v0.1.5
       with:
@@ -48,5 +51,5 @@ jobs:
         key: ${{ secrets.EC2_KEY }}
         script: |
           docker pull pallishreeb/django-api-cicd:latest
-          docker-compose down
-          docker-compose up -d
+          docker stop $(docker ps -q)  # Stop all running containers
+          docker run -d -p 80:8000 pallishreeb/django-api-cicd:latest

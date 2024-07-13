@@ -172,3 +172,40 @@ step 6 - AWS EC2
 Deploys the updated Docker image to your AWS EC2 instance.
 Ensure Docker is installed and running on your EC2 instance.
 Pull and run the Docker image from Docker Hub (or another registry).
+
+Update Package Index:
+sudo apt update
+
+Install Prerequisite Packages:
+sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+
+Add Docker’s Official GPG Key:
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+Set Up the Stable Repository:
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+Update the Package Index Again:
+sudo apt update
+
+
+Install Docker:
+sudo apt install docker-ce docker-ce-cli containerd.io -y
+
+Start Docker:
+sudo systemctl start docker
+
+Enable Docker to Start at Boot:
+sudo systemctl enable docker
+
+Add Your User to the Docker Group:
+sudo usermod -aG docker $USER
+
+*you'll need to log out and log back in for this change to take effect.
+
+Pull the Docker Image:
+docker pull pallishreeb/django-api-cicd:latest
+
+Run the Docker Image:
+docker run -d -p 80:8000 pallishreeb/django-api-cicd:latest
+This command maps port 80 on your EC2 instance to port 8000 inside the Docker container.
