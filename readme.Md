@@ -209,3 +209,10 @@ docker pull pallishreeb/django-api-cicd:latest
 Run the Docker Image:
 docker run -d -p 80:8000 pallishreeb/django-api-cicd:latest
 This command maps port 80 on your EC2 instance to port 8000 inside the Docker container.
+
+Add the EC2 user to the Docker group:
+sudo usermod -aG docker $USER
+newgrp docker
+
+sudo service docker restart
+
