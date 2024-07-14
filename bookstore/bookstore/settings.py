@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 import boto3
 from dotenv import load_dotenv
-from secretStore.get_secret import get_secret
+# from secretStore.get_secret import get_secret
 
 # Retrieve secrets from AWS Secrets Manager
 # secrets = get_secret("ec2-apis", "ap-south-1")
@@ -36,7 +36,7 @@ def fetch_secrets():
         }
 
 # Retrieve secrets based on environment
-secrets = fetch_secrets()
+# secrets = fetch_secrets()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -177,26 +177,26 @@ LOGGING = {
 }
 
 # AWS settings (for static and media files)
-if IS_DEV:
-    AWS_ACCESS_KEY_ID = secrets.get('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = secrets.get('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = secrets.get('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_REGION_NAME = secrets.get('AWS_S3_REGION_NAME')
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-    AWS_DEFAULT_ACL = None
-    DEFAULT_FILE_STORAGE = 'bookstore.storage_backends.MediaStorage'
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
-else:  # IS_PROD
-    AWS_ACCESS_KEY_ID = secrets['AWS_ACCESS_KEY_ID']
-    AWS_SECRET_ACCESS_KEY = secrets['AWS_SECRET_ACCESS_KEY']
-    AWS_STORAGE_BUCKET_NAME = secrets['AWS_STORAGE_BUCKET_NAME']
-    AWS_S3_REGION_NAME = secrets['AWS_S3_REGION_NAME']
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-    AWS_DEFAULT_ACL = None
-    DEFAULT_FILE_STORAGE = 'bookstore.storage_backends.MediaStorage'
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+# if IS_DEV:
+#     AWS_ACCESS_KEY_ID = secrets.get('AWS_ACCESS_KEY_ID')
+#     AWS_SECRET_ACCESS_KEY = secrets.get('AWS_SECRET_ACCESS_KEY')
+#     AWS_STORAGE_BUCKET_NAME = secrets.get('AWS_STORAGE_BUCKET_NAME')
+#     AWS_S3_REGION_NAME = secrets.get('AWS_S3_REGION_NAME')
+#     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+#     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+#     AWS_DEFAULT_ACL = None
+#     DEFAULT_FILE_STORAGE = 'bookstore.storage_backends.MediaStorage'
+#     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+# else:  # IS_PROD
+#     AWS_ACCESS_KEY_ID = secrets['AWS_ACCESS_KEY_ID']
+#     AWS_SECRET_ACCESS_KEY = secrets['AWS_SECRET_ACCESS_KEY']
+#     AWS_STORAGE_BUCKET_NAME = secrets['AWS_STORAGE_BUCKET_NAME']
+#     AWS_S3_REGION_NAME = secrets['AWS_S3_REGION_NAME']
+#     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+#     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+#     AWS_DEFAULT_ACL = None
+#     DEFAULT_FILE_STORAGE = 'bookstore.storage_backends.MediaStorage'
+#     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 
 
 # AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
